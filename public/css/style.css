@@ -492,6 +492,7 @@ button:focus {
 
 .single_feature {
   position: relative;
+  border-radius: 20px;
   background: #f9f9ff;
   padding: 40px 36px;
   margin-bottom: 30px;
