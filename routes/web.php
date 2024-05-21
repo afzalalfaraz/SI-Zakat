@@ -5,6 +5,7 @@ use App\Http\Controllers\DonasiController;
 use App\Http\Controllers\KasKeluarController;
 use App\Http\Controllers\KasMasukController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +19,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+// Route::get('/home', function () {
+//     return view('home');
+// });
+
+Route::get('/pembayaran', [PembayaranController::class, 'index']);
+Route::post('/pembayaran/store', [PembayaranController::class,'store'])->name('pembayaran.store');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 Route::get('/', function () {
     return view('home');
 });
@@ -37,14 +58,6 @@ Route::post('/pembayaran/store', [PembayaranController::class,'store'])->name('p
 Route::get('/beranda', function () {
     return view('admin.index');
 })->name('dashboard');
-
-// Route::get('/kas', function () {
-//         return view('admin.kasMasuk.index');
-//     })->name('admin.kas');    
-
-// Route::get('/qwer', function () {
-//     return view('admin.kasMasuk.create');
-// });
 
 Route::get('/kas', [KasMasukController::class, 'index'])->name('kasMasuk.index');
 Route::get('/kasmasuk-create', [KasMasukController::class, 'create']);
@@ -76,7 +89,9 @@ Route::delete('/agenda-delete-{id}', [AgendaController::class, 'destroy'])->name
 
 Route::get('/pembayaran-admin', [PembayaranController::class, 'indexAdmin'])->name('pembayaran.index');
 Route::get('/pembayaran-create', [PembayaranController::class, 'create']);
-Route::post('/pembayaran/store', [PembayaranController::class, 'storeAdmin'])->name('admin.pembayaran.store');
+Route::post('/pembayaran-admin/store', [PembayaranController::class, 'storeAdmin'])->name('admin.pembayaran.store');
 Route::get('/pembayaran-edit-{id}', [PembayaranController::class, 'edit'])->name('pembayaran.edit');
 Route::put('/pembayaran-update-{id}', [PembayaranController::class, 'update'])->name('pembayaran.update');
 Route::delete('/pembayaran-delete-{id}', [PembayaranController::class, 'destroy'])->name('pembayaran.destroy');
+
+require __DIR__.'/auth.php';

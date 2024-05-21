@@ -39,8 +39,8 @@ class PembayaranController extends Controller
         if ($request->hasFile('bukti')) {
             $file = $request->file('bukti');
             $filename = Str::uuid() . '.' . $file->getClientOriginalExtension(); // Nama file unik
-            $file->storeAs('bukti_pembayaran', $filename); // Simpan di folder 'bukti_pembayaran'
-
+            // $file->storeAs('bukti_pembayaran', $filename); // Simpan di folder 'bukti_pembayaran'
+            $file->move(public_path('bukti_pembayaran'), $filename);
             $validatedData['bukti'] = $filename; // Tambahkan nama file ke data yang disimpan
         }
 
@@ -49,7 +49,7 @@ class PembayaranController extends Controller
         $pembayaran = Pembayaran::create($validatedData);
 
         // Redirect atau respons setelah sukses
-        return redirect('/')->with('success', 'Pembayaran berhasil disimpan!');
+        return redirect('/home')->with('success', 'Pembayaran berhasil disimpan!');
     }
     public function indexAdmin()
     {
@@ -77,8 +77,9 @@ class PembayaranController extends Controller
         // Simpan bukti pembayaran
         if ($request->hasFile('bukti')) {
             $file = $request->file('bukti');
-            $filename = Str::uuid() . '.' . $file->getClientOriginalExtension(); // Nama file unik
-            $file->storeAs('bukti_pembayaran', $filename); // Simpan di folder 'bukti_pembayaran'
+            $filename = Str::uuid() . '.' . $file->getClientOriginalExtension(); 
+            $file->move(public_path('bukti_pembayaran'), $filename);// Nama file unik
+            // $file->storeAs('bukti_pembayaran', $filename); // Simpan di folder 'bukti_pembayaran'
 
             $validatedData['bukti'] = $filename; // Tambahkan nama file ke data yang disimpan
         }

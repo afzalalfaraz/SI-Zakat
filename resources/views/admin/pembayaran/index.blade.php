@@ -43,16 +43,19 @@
                                     <td>{{ $bayar->donasi->nama }}</td>
                                     <td>Rp{{ number_format($bayar->jumlah, 0, ',', '.') }}</td>
                                     <td>
-                                        <a href="{{ asset('storage/bukti_pembayaran/' . $bayar->bukti) }}" target="_blank">
-                                            <img src="{{ asset('storage/bukti_pembayaran/' . $bayar->bukti) }}" alt="Bukti Pembayaran" class="img-fluid" width="100">
-                                        </a>
+                                        <img src="{{ asset('bukti_pembayaran/' . $bayar->bukti) }}"
+                                            alt="Bukti Pembayaran" class="img-fluid" width="100">
+
                                     </td>
                                     <td>
-                                        <a href="/pembayaran-edit-{{ $bayar->id }}" class="btn btn-sm btn-warning">Edit</a>
-                                        <form action="/pembayaran-delete-{{ $bayar->id }}" method="POST" style="display:inline;">
+                                        <a href="/pembayaran-edit-{{ $bayar->id }}"
+                                            class="btn btn-sm btn-warning">Edit</a>
+                                        <form action="/pembayaran-delete-{{ $bayar->id }}" method="POST"
+                                            style="display:inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this item?');">Hapus</button>
+                                            <button type="submit" class="btn btn-sm btn-danger"
+                                                onclick="return confirm('Are you sure you want to delete this item?');">Hapus</button>
                                         </form>
                                     </td>
                                 </tr>

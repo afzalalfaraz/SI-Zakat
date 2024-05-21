@@ -41,11 +41,11 @@
                 </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/kas-keluar">
-                  <i class="fas fa-upload"></i>
-                  <span>Data Kas Keluar</span>
-              </a>
-          </li>
+                <a class="nav-link" href="/kas-keluar">
+                    <i class="fas fa-upload"></i>
+                    <span>Data Kas Keluar</span>
+                </a>
+            </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="/pembayaran-admin">
@@ -61,12 +61,12 @@
                 </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/donasi">
-                  <i class="fas fa-hand-holding-heart"></i>
-                  <span>Data Donasi</span>
-              </a>
-          </li>
-            
+                <a class="nav-link" href="/donasi">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <span>Data Donasi</span>
+                </a>
+            </li>
+
         </ul>
 
         <!-- Sidebar -->
@@ -85,33 +85,27 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="img-profile rounded-circle" src="img/boy.png" style="max-width: 60px">
-                                <span class="ml-2 d-none d-lg-inline text-white small">Maman Ketoprak</span>
+                                {{-- <img class="img-profile rounded-circle" src="img/boy.png" style="max-width: 60px"> --}}
+                                <span class="ml-2 d-none d-lg-inline text-white small">{{ Auth::user()->name }}</span>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
-                                {{-- <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a> 
-                                <div class="dropdown-divider"></div>
-                                --}}
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <x-dropdown-link :href="route('profile.edit')">
+                                    {{ __('Profile') }}
+                                </x-dropdown-link>
 
-                                <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal"
-                                    data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a>
+                                <!-- Authentication -->
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+
+                                    <x-dropdown-link :href="route('logout')"
+                                        onclick="event.preventDefault();
+                                                          this.closest('form').submit();">
+                                        {{ __('Log Out') }}
+                                    </x-dropdown-link>
+                                </form>
                             </div>
                         </li>
+
                     </ul>
                 </nav>
                 <!-- Topbar -->
